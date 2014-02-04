@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="javadoc">
+    <target name="javadoc">
+        <javadoc access="private" author="true" classpath="." destdir="doc" doctitle="Assign1JavaDoc" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" source="1.7" sourcefiles="SocketSrc/Listener.java,SocketSrc/UDPServer.java,SocketSrc/UDPClient.java,SocketSrc/TestServer.java,SocketSrc/SockClient6.java,SocketSrc/SockServer6.java,SocketSrc/Log.java,SocketSrc/Sender.java" sourcepath="SocketSrc" splitindex="true" use="true" version="true">
+            <link href="http://download.oracle.com/javase/7/docs/api/"/>
+            <link href="file:/E:/MEDIA/Documents/James_School_Work/ASU_Spring_2014/SER_422/WorkSpace/Assign1/doc/"/>
+        </javadoc>
+    </target>
+</project>
