@@ -1,16 +1,15 @@
-import jamesLogger.Log;
-
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import simple.Logger.Logger;
 
 class SockServer6
 {
@@ -18,11 +17,10 @@ class SockServer6
 	public static void main(String args[]) throws Exception
 	{
 
-		Log log= new Log(100, true, 6, true, "ServerLog.log");
+		Logger log= new Logger(100, true, 6, true, "ServerLog.log", "Log");
 		log.resetLog();
 		ServerSocket serv= null;
 		ConcurrentHashMap<Integer,AtomicInteger> counts= new ConcurrentHashMap<Integer,AtomicInteger>();
-		final ArrayList<Connection> clients= new ArrayList<Connection>();
 		int cons= 0;
 		int sleep= 1000;
 		if (args.length == 1)
@@ -46,10 +44,8 @@ class SockServer6
 			try
 			{
 				cons++;
-				Connection client= new Connection(serv.accept(), counts, sleep, cons, log, serv);
-				clients.add(client);
-				executor.execute(client);
-				System.out.println(Thread.activeCount());
+				executor.execute(new Connection(serv.accept(), counts, sleep, cons, log, serv));
+				log.log(8, "" + Thread.activeCount());
 			}
 			catch (IOException e)
 			{
@@ -75,7 +71,7 @@ class Connection implements Runnable
 
 	private int									num;
 
-	private Log									log		= new Log();
+	private Logger									log		= new Logger();
 
 	private ServerSocket						serv	= null;
 
@@ -89,7 +85,7 @@ class Connection implements Runnable
 	 * @param log
 	 * @param serv
 	 */
-	Connection(Socket sock, ConcurrentHashMap<Integer,AtomicInteger> counts, int sleep, int num, Log log, ServerSocket serv)
+	Connection(Socket sock, ConcurrentHashMap<Integer,AtomicInteger> counts, int sleep, int num, Logger log, ServerSocket serv)
 	{
 
 		this.sock= sock;

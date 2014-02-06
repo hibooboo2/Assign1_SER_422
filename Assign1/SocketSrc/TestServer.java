@@ -1,15 +1,15 @@
-import jamesLogger.Log;
-
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+
+import simple.Logger.Logger;
 
 
 public class TestServer
 {
 
 	public static void
-	testConfiguration(int passesPerConfig, int passDelay, int times, int totalIDs, int samenumArg, int resetArg, Log log)
+	testConfiguration(int passesPerConfig, int passDelay, int times, int totalIDs, int samenumArg, int resetArg, Logger log)
 	{
 
 		int passesForThisConfig= passesPerConfig;
@@ -17,7 +17,7 @@ public class TestServer
 		long startTests= System.currentTimeMillis() + passesForThisConfig * passDelay;
 		for (int i= 0; i < passesForThisConfig; i++)
 		{
-			ExecutorService executor= Executors.newCachedThreadPool();
+			ExecutorService executor= Executors.newFixedThreadPool(300);
 			long start= System.currentTimeMillis();
 			for (int testNum= 0; testNum < times; testNum++)
 			{
@@ -59,7 +59,7 @@ public class TestServer
 	public static void main(String[] args)
 	{
 
-		Log log= new Log(1000, true, 2, true, "Tester.log");
+		Logger log= new Logger(1000, true, 2, true, "Tester.log", "Log");
 		int passDelay= 0;
 		log.resetLog();
 		if (args.length != 3)
@@ -121,9 +121,9 @@ class Tester implements Runnable
 
 	private boolean	resets			= false;
 
-	private Log		log				= new Log();
+	private Logger		log				= new Logger();
 
-	Tester(int num, int same, int totalIDs, int reset, Log log)
+	Tester(int num, int same, int totalIDs, int reset, Logger log)
 	{
 		this.testnum= num;
 		this.samenum= same > 0 ? true : false;

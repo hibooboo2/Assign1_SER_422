@@ -1,9 +1,9 @@
-import jamesLogger.Log;
-
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+
+import simple.Logger.Logger;
 
 class SockClient6 implements Runnable
 {
@@ -16,9 +16,9 @@ class SockClient6 implements Runnable
 
 	private final boolean	shutdown;
 
-	private final Log		log;
+	private final Logger		log;
 
-	SockClient6(int id, int numToAdd, boolean reset, boolean shutdown, Log log)
+	SockClient6(int id, int numToAdd, boolean reset, boolean shutdown, Logger log)
 	{
 
 		this.id= id;
@@ -114,7 +114,7 @@ class SockClient6 implements Runnable
 	public static void main(String args[]) throws Exception
 	{
 
-		Log log= new Log(1000, true, 7, false, "ClientLog.log");
+		Logger log= new Logger(1000, true, 7, false, "ClientLog.log", "Log");
 		int id= 0;
 		int i1=43;
 		boolean reset = false;
