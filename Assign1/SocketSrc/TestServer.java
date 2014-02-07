@@ -59,7 +59,7 @@ public class TestServer
 	public static void main(String[] args)
 	{
 
-		Logger log= new Logger(1000, true, 2, true, "Tester.log", "Log");
+		Logger log= new Logger(1000, true, 2, true, "TesterJosh.log", "Log");
 		int passDelay= 0;
 		log.resetLog();
 		if (args.length != 3)

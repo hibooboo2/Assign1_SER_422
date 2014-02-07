@@ -127,9 +127,8 @@ class Connection implements Runnable
 			{
 				this.counts.put(id, new AtomicInteger());
 			}
-			this.addToMap(id, x, reset);
+			out.writeInt(this.addToMap(id, x, reset).get());
 			this.log.log(5, this.counts.get(id).get() + " " + this.num + " Synced");
-			out.writeInt(this.counts.get(id).get());
 			out.flush();
 			this.log.log(4, "Map: " + this.counts.toString() + "Cons: " + this.num);
 		}
